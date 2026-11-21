@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Second Look — a spot-the-difference game</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Second Look</div>
+  <div class="hud">
+    <span id="scene-name" class="hud-scene"></span>
+    <span id="counter" class="hud-counter"></span>
+    <span id="score" class="hud-score"></span>
+    <div class="timer" aria-label="Time remaining">
+      <div class="timer-track"><div id="timer-fill"></div></div>
+      <span id="timer-text">0:00</span>
+    </div>
+    <button id="btn-hint" type="button">Hint (3)</button>
+    <button id="btn-pause" type="button">Pause</button>
+    <button id="btn-restart" type="button">Restart</button>
+    <button id="btn-sound" type="button">Sound: on</button>
+  </div>
+</header>
+
+<main id="stage" class="stage">
+  <figure class="panel-wrap">
+    <canvas id="panel-a" width="1200" height="900" aria-label="The original picture"></canvas>
+    <figcaption>Original</figcaption>
+  </figure>
+  <figure class="panel-wrap">
+    <canvas id="panel-b" width="1200" height="900" aria-label="The altered picture: click a difference"></canvas>
+    <figcaption>Spot the changes</figcaption>
+  </figure>
+
+  <div id="toast" class="toast" aria-hidden="true">
+    <div class="toast-title"></div>
+    <div class="toast-sub"></div>
+  </div>
+
+  <section id="screen-title" class="screen">
+    <div class="card">
+      <h1>Second Look</h1>
+      <p class="tagline">Two pictures, side by side. They are <em>almost</em> the same.<br>
+      Click each difference before the clock runs out.</p>
+      <div id="scene-list" class="scene-list"></div>
+      <p class="howto">Click a difference in either picture. A wrong click costs 5 seconds.
+      Stuck? Press <strong>Hint</strong> (or <kbd>H</kbd>) — three hints per scene.
+      <kbd>P</kbd> pauses, <kbd>R</kbd> restarts, <kbd>M</kbd> mutes.</p>
+    </div>
+  </section>
+
+  <section id="screen-pause" class="screen" hidden>
+    <div class="card">
+      <h2>Paused</h2>
+      <p>The pictures are waiting.</p>
+      <div class="card-buttons">
+        <button id="btn-resume" type="button" class="primary">Resume</button>
+        <button id="btn-pause-menu" type="button">Title screen</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-win" class="screen" hidden>
+    <div class="card">
+      <h2>All found!</h2>
+      <p id="win-stats"></p>
+      <div class="card-buttons">
+        <button id="btn-next" type="button" class="primary">Next scene</button>
+        <button id="btn-win-replay" type="button">Play again</button>
+        <button id="btn-win-menu" type="button">Title screen</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-lose" class="screen" hidden>
+    <div class="card">
+      <h2>Out of time</h2>
+      <p id="lose-stats"></p>
+      <div class="card-buttons">
+        <button id="btn-retry" type="button" class="primary">Try again</button>
+        <button id="btn-lose-menu" type="button">Title screen</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<p id="status" role="status" aria-live="polite"></p>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
